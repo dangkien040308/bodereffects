@@ -1,0 +1,81 @@
+:root {
+    --black : #211E32 ;
+    --dark : #2A2F42 ;
+    --green : #5AFE72;
+    --white : #ffffff ;
+    --purple : #9A3BBA ;
+    --danger : #FE4E56 ;
+    --yellow : #fbff22 ;
+}
+@property --rotate{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: true;
+}
+body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.card {
+    width: 360px;
+    height: 500px;
+    background-color: var(--dark);
+    position: relative;
+    border-radius: 5px;
+}
+.card::before ,
+.card::after {
+    width: 106%;
+    height: 104%;
+    background-image: linear-gradient( var(--rotate), var(--purple) ,var(--danger));
+    position: absolute;
+    content: '';
+    left: -3%;
+    top : -2% ;
+    z-index: -1;
+    border-radius: 5px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.card::after {
+    filter: blur(40px);
+}
+.card:hover::before,
+.card:hover::after {
+    opacity: 1;
+    animation: animate 1s linear infinite;
+}
+@keyframes animate {
+    0% {
+        --rotate : 0deg ;
+    }
+    100% {
+        --rotate : 360deg ;
+    }
+}
+.card .img{
+    width: 96%;
+    height: 96%;
+    top : 2% ;
+    left : 2% ;
+    object-fit: cover;
+    border-radius: 5px;
+    position: absolute;
+    transition: 0.5s;
+}
+.card .img:nth-child(2) {
+     opacity: 0;
+     top : 0 ;
+     left : 0 ;
+     width: 102%;
+     height: 101%;
+}
+.card:hover .img:nth-child(2) {
+    opacity: 1;
+}
+.card:hover .img:nth-child(1) {
+    opacity: 0;
+}
